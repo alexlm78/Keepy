@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ClipboardView: View {
     @ObservedObject private var manager = ClipboardManager.shared
+    @ObservedObject private var localization = LocalizationManager.shared
     @State private var searchText = ""
     @State private var showingClearAlert = false
 
@@ -28,7 +29,7 @@ struct ClipboardView: View {
             HStack {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(.secondary)
-                TextField("Buscar...", text: $searchText)
+                TextField("clipboard.search".localized, text: $searchText)
                     .textFieldStyle(.plain)
 
                 if !searchText.isEmpty {
@@ -53,10 +54,10 @@ struct ClipboardView: View {
                             .font(.system(size: 48))
                             .foregroundColor(.secondary)
 
-                        Text(searchText.isEmpty ? "Historial de Portapapeles" : "No se encontraron resultados")
+                        Text(searchText.isEmpty ? "clipboard.title".localized : "clipboard.noResults".localized)
                             .font(.headline)
 
-                        Text(searchText.isEmpty ? "Aquí aparecerá todo lo que copies" : "Intenta con otra búsqueda")
+                        Text(searchText.isEmpty ? "clipboard.empty".localized : "clipboard.tryAgain".localized)
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                             .multilineTextAlignment(.center)
@@ -75,12 +76,12 @@ struct ClipboardView: View {
                                 }
                                 .contextMenu {
                                     Button(action: { manager.copyToClipboard(item) }) {
-                                        Label("Copiar", systemImage: "doc.on.doc")
+                                        Label("clipboard.copy".localized, systemImage: "doc.on.doc")
                                     }
 
                                     Button(action: { manager.toggleFavorite(item) }) {
                                         Label(
-                                            item.isFavorite ? "Quitar favorito" : "Marcar favorito",
+                                            item.isFavorite ? "clipboard.unfavorite".localized : "clipboard.favorite".localized,
                                             systemImage: item.isFavorite ? "star.slash" : "star"
                                         )
                                     }
@@ -88,7 +89,7 @@ struct ClipboardView: View {
                                     Divider()
 
                                     Button(role: .destructive, action: { manager.deleteItem(item) }) {
-                                        Label("Eliminar", systemImage: "trash")
+                                        Label("clipboard.delete".localized, systemImage: "trash")
                                     }
                                 }
                         }
@@ -98,13 +99,13 @@ struct ClipboardView: View {
 
             // Footer
             HStack {
-                Text("\(filteredItems.count) items")
+                Text("\(filteredItems.count) \("clipboard.items".localized)")
                     .font(.caption)
                     .foregroundColor(.secondary)
 
                 Spacer()
 
-                Button("Limpiar Todo") {
+                Button("clipboard.clearAll".localized) {
                     showingClearAlert = true
                 }
                 .font(.caption)
@@ -113,13 +114,14 @@ struct ClipboardView: View {
             .padding(8)
             .background(Color(NSColor.controlBackgroundColor))
         }
-        .alert("Limpiar Historial", isPresented: $showingClearAlert) {
-            Button("Cancelar", role: .cancel) { }
-            Button("Limpiar", role: .destructive) {
+        .id(localization.currentLanguage)
+        .alert("clipboard.clearConfirm.title".localized, isPresented: $showingClearAlert) {
+            Button("clipboard.cancel".localized, role: .cancel) { }
+            Button("clipboard.clear".localized, role: .destructive) {
                 manager.clearHistory()
             }
         } message: {
-            Text("¿Estás seguro que quieres eliminar todo el historial del portapapeles?")
+            Text("clipboard.clearConfirm.message".localized)
         }
     }
 }

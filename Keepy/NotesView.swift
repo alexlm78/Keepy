@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct NotesView: View {
+    @ObservedObject private var localization = LocalizationManager.shared
     @State private var searchText = ""
 
     var body: some View {
@@ -15,7 +16,7 @@ struct NotesView: View {
             // Header con búsqueda
             VStack(spacing: 8) {
                 HStack {
-                    Text("Notas Rápidas")
+                    Text("notes.title".localized)
                         .font(.headline)
 
                     Spacer()
@@ -32,7 +33,7 @@ struct NotesView: View {
                 HStack {
                     Image(systemName: "magnifyingglass")
                         .foregroundColor(.secondary)
-                    TextField("Buscar notas...", text: $searchText)
+                    TextField("notes.search".localized, text: $searchText)
                         .textFieldStyle(.plain)
 
                     if !searchText.isEmpty {
@@ -59,10 +60,10 @@ struct NotesView: View {
                         .font(.system(size: 48))
                         .foregroundColor(.secondary)
 
-                    Text("No hay notas")
+                    Text("notes.empty".localized)
                         .font(.headline)
 
-                    Text("Crea tu primera nota rápida")
+                    Text("notes.emptyDescription".localized)
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
@@ -73,7 +74,7 @@ struct NotesView: View {
 
             // Footer
             HStack {
-                Text("0 notas")
+                Text("0 \("notes.count".localized)")
                     .font(.caption)
                     .foregroundColor(.secondary)
 
@@ -82,6 +83,7 @@ struct NotesView: View {
             .padding(8)
             .background(Color(NSColor.controlBackgroundColor))
         }
+        .id(localization.currentLanguage)
     }
 }
 

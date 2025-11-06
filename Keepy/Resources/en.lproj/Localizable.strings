@@ -1,0 +1,82 @@
+/* Menu Bar */
+"menu.settings" = "Settings";
+"menu.quit" = "Quit Keepy";
+
+/* Tabs */
+"tab.clipboard" = "Clipboard";
+"tab.files" = "Files";
+"tab.notes" = "Notes";
+"tab.settings" = "Settings";
+
+/* Clipboard View */
+"clipboard.search" = "Search...";
+"clipboard.title" = "Clipboard History";
+"clipboard.empty" = "Everything you copy will appear here";
+"clipboard.noResults" = "No results found";
+"clipboard.tryAgain" = "Try another search";
+"clipboard.items" = "items";
+"clipboard.clearAll" = "Clear All";
+"clipboard.clearConfirm.title" = "Clear History";
+"clipboard.clearConfirm.message" = "Are you sure you want to delete all clipboard history?";
+"clipboard.cancel" = "Cancel";
+"clipboard.clear" = "Clear";
+"clipboard.copy" = "Copy";
+"clipboard.favorite" = "Mark as Favorite";
+"clipboard.unfavorite" = "Remove Favorite";
+"clipboard.delete" = "Delete";
+
+/* Temporary Files View */
+"files.title" = "Temporary Files";
+"files.empty" = "No temporary files";
+"files.emptyDescription" = "Drag files here or use the + button";
+"files.count" = "files";
+"files.cleanExpired" = "Clean Expired";
+"files.add" = "Add File";
+"files.policy.session" = "End of session";
+"files.policy.oneHour" = "1 hour";
+"files.policy.oneDay" = "1 day";
+"files.policy.oneWeek" = "1 week";
+"files.policy.manual" = "Manual";
+"files.expires" = "Expires";
+"files.expired" = "Expired";
+"files.open" = "Open";
+"files.reveal" = "Show in Finder";
+
+/* Notes View */
+"notes.title" = "Quick Notes";
+"notes.search" = "Search notes...";
+"notes.empty" = "No notes";
+"notes.emptyDescription" = "Create your first quick note";
+"notes.count" = "notes";
+"notes.new" = "New Note";
+"notes.delete" = "Delete";
+"notes.pin" = "Pin";
+"notes.unpin" = "Unpin";
+
+/* Settings View */
+"settings.title" = "Settings";
+"settings.version" = "Keepy v1.0";
+"settings.clipboard" = "Clipboard";
+"settings.clipboard.maxItems" = "Maximum items in history:";
+"settings.files" = "Temporary Files";
+"settings.files.defaultPolicy" = "Default expiration policy:";
+"settings.general" = "General";
+"settings.general.language" = "Language:";
+"settings.general.launchAtLogin" = "Launch at system startup";
+"settings.about" = "About";
+"settings.about.description" = "Keepy is a clipboard, temporary files, and quick notes utility for macOS.";
+"settings.help" = "Help";
+"settings.github" = "GitHub";
+
+/* Diagnostics */
+"settings.diagnostics" = "Localization Diagnostics";
+"settings.diagnostics.currentLanguage" = "Current language:";
+"settings.diagnostics.key" = "Key";
+"settings.diagnostics.value" = "Resolved value";
+"settings.diagnostics.systemMode" = "System language mode:";
+"settings.diagnostics.detectedLanguage" = "Detected system language:";
+"settings.diagnostics.enabled" = "Enabled";
+"settings.diagnostics.disabled" = "Disabled";
+
+/* System Language Option */
+"settings.general.useSystemLanguage" = "Use system language";

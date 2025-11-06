@@ -1,0 +1,82 @@
+/* Menu Bar */
+"menu.settings" = "Configuración";
+"menu.quit" = "Salir de Keepy";
+
+/* Tabs */
+"tab.clipboard" = "Clipboard";
+"tab.files" = "Archivos";
+"tab.notes" = "Notas";
+"tab.settings" = "Config";
+
+/* Clipboard View */
+"clipboard.search" = "Buscar...";
+"clipboard.title" = "Historial de Portapapeles";
+"clipboard.empty" = "Aquí aparecerá todo lo que copies";
+"clipboard.noResults" = "No se encontraron resultados";
+"clipboard.tryAgain" = "Intenta con otra búsqueda";
+"clipboard.items" = "items";
+"clipboard.clearAll" = "Limpiar Todo";
+"clipboard.clearConfirm.title" = "Limpiar Historial";
+"clipboard.clearConfirm.message" = "¿Estás seguro que quieres eliminar todo el historial del portapapeles?";
+"clipboard.cancel" = "Cancelar";
+"clipboard.clear" = "Limpiar";
+"clipboard.copy" = "Copiar";
+"clipboard.favorite" = "Marcar favorito";
+"clipboard.unfavorite" = "Quitar favorito";
+"clipboard.delete" = "Eliminar";
+
+/* Temporary Files View */
+"files.title" = "Archivos Temporales";
+"files.empty" = "No hay archivos temporales";
+"files.emptyDescription" = "Arrastra archivos aquí o usa el botón +";
+"files.count" = "archivos";
+"files.cleanExpired" = "Limpiar Expirados";
+"files.add" = "Agregar Archivo";
+"files.policy.session" = "Fin de sesión";
+"files.policy.oneHour" = "1 hora";
+"files.policy.oneDay" = "1 día";
+"files.policy.oneWeek" = "1 semana";
+"files.policy.manual" = "Manual";
+"files.expires" = "Expira";
+"files.expired" = "Expirado";
+"files.open" = "Abrir";
+"files.reveal" = "Mostrar en Finder";
+
+/* Notes View */
+"notes.title" = "Notas Rápidas";
+"notes.search" = "Buscar notas...";
+"notes.empty" = "No hay notas";
+"notes.emptyDescription" = "Crea tu primera nota rápida";
+"notes.count" = "notas";
+"notes.new" = "Nueva Nota";
+"notes.delete" = "Eliminar";
+"notes.pin" = "Fijar";
+"notes.unpin" = "Desfijar";
+
+/* Settings View */
+"settings.title" = "Configuración";
+"settings.version" = "Keepy v1.0";
+"settings.clipboard" = "Portapapeles";
+"settings.clipboard.maxItems" = "Máximo de items en historial:";
+"settings.files" = "Archivos Temporales";
+"settings.files.defaultPolicy" = "Política de expiración por defecto:";
+"settings.general" = "General";
+"settings.general.language" = "Idioma:";
+"settings.general.launchAtLogin" = "Iniciar al arrancar el sistema";
+"settings.about" = "Acerca de";
+"settings.about.description" = "Keepy es una utilidad de portapapeles, archivos temporales y notas rápidas para macOS.";
+"settings.help" = "Ayuda";
+"settings.github" = "GitHub";
+
+/* Diagnóstico */
+"settings.diagnostics" = "Diagnóstico de localización";
+"settings.diagnostics.currentLanguage" = "Idioma actual:";
+"settings.diagnostics.key" = "Clave";
+"settings.diagnostics.value" = "Valor resuelto";
+"settings.diagnostics.systemMode" = "Modo idioma del sistema:";
+"settings.diagnostics.detectedLanguage" = "Idioma del sistema detectado:";
+"settings.diagnostics.enabled" = "Activado";
+"settings.diagnostics.disabled" = "Desactivado";
+
+/* Opción idioma del sistema */
+"settings.general.useSystemLanguage" = "Usar idioma del sistema";

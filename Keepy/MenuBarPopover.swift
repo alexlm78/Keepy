@@ -8,16 +8,17 @@
 import SwiftUI
 
 struct MenuBarPopover: View {
+    @ObservedObject private var localization = LocalizationManager.shared
     @State private var selectedTab = 0
 
     var body: some View {
         VStack(spacing: 0) {
             // Header con tabs
             HStack(spacing: 0) {
-                TabButton(icon: "doc.on.clipboard", title: "Clipboard", tag: 0, selectedTab: $selectedTab)
-                TabButton(icon: "folder", title: "Archivos", tag: 1, selectedTab: $selectedTab)
-                TabButton(icon: "note.text", title: "Notas", tag: 2, selectedTab: $selectedTab)
-                TabButton(icon: "gearshape", title: "Config", tag: 3, selectedTab: $selectedTab)
+                TabButton(icon: "doc.on.clipboard", title: "tab.clipboard".localized, tag: 0, selectedTab: $selectedTab)
+                TabButton(icon: "folder", title: "tab.files".localized, tag: 1, selectedTab: $selectedTab)
+                TabButton(icon: "note.text", title: "tab.notes".localized, tag: 2, selectedTab: $selectedTab)
+                TabButton(icon: "gearshape", title: "tab.settings".localized, tag: 3, selectedTab: $selectedTab)
             }
             .frame(height: 40)
             .background(Color(NSColor.controlBackgroundColor))
@@ -41,6 +42,7 @@ struct MenuBarPopover: View {
             }
         }
         .frame(width: 400, height: 600)
+        .id(localization.currentLanguage)
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("OpenSettings"))) { _ in
             selectedTab = 3
         }

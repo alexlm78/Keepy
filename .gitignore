@@ -149,7 +149,7 @@ iOSInjectionProject/
 
 ### dotenv ###
 .env
-
+build.log
 
 # Kreaker specific files
 CLAUDE.md

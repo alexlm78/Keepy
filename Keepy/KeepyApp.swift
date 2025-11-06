@@ -7,6 +7,7 @@
 
 import SwiftUI
 import AppKit
+import Combine
 
 @main
 struct KeepyApp: App {
@@ -24,6 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var statusItem: NSStatusItem!
     var popover: NSPopover!
     var menu: NSMenu!
+    private var languageObserver: AnyCancellable?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         // Crear status item en menu bar
@@ -43,26 +45,30 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         popover.behavior = .transient
         popover.contentViewController = NSHostingController(rootView: MenuBarPopover())
 
-        // Crear menú contextual (para click derecho)
-        menu = NSMenu()
+        // Crear menú contextual
+        createMenu()
 
-        let settingsItem = NSMenuItem(title: "Configuración", action: #selector(openSettings), keyEquivalent: ",")
-        settingsItem.target = self
-        menu.addItem(settingsItem)
-
-        menu.addItem(NSMenuItem.separator())
-
-        let quitItem = NSMenuItem(title: "Salir de Keepy", action: #selector(quitApp), keyEquivalent: "q")
-        quitItem.target = self
-        menu.addItem(quitItem)
+        // Observer para actualizar menú cuando cambie el idioma
+        languageObserver = LocalizationManager.shared.$currentLanguage.sink { [weak self] _ in
+            self?.createMenu()
+        }
 
         // Iniciar monitoring de clipboard
         ClipboardManager.shared.startMonitoring()
+
+        // Iniciar scheduler de limpieza de archivos temporales
+        TemporaryFileManager.shared.startCleanupScheduler()
     }
 
     func applicationWillTerminate(_ notification: Notification) {
         // Detener monitoring al cerrar
         ClipboardManager.shared.stopMonitoring()
+
+        // Detener scheduler de limpieza
+        TemporaryFileManager.shared.stopCleanupScheduler()
+
+        // Limpiar archivos de sesión
+        TemporaryFileManager.shared.cleanupSessionFiles()
     }
 
     @objc func statusItemClicked(_ sender: NSStatusBarButton) {
@@ -104,5 +110,29 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @objc func quitApp() {
         NSApplication.shared.terminate(nil)
+    }
+    
+    func createMenu() {
+        menu = NSMenu()
+        
+        // Settings item
+        let settingsItem = NSMenuItem(
+            title: "menu.settings".localized,
+            action: #selector(openSettings),
+            keyEquivalent: ","
+        )
+        settingsItem.target = self
+        menu.addItem(settingsItem)
+        
+        menu.addItem(NSMenuItem.separator())
+        
+        // Quit item
+        let quitItem = NSMenuItem(
+            title: "menu.quit".localized,
+            action: #selector(quitApp),
+            keyEquivalent: "q"
+        )
+        quitItem.target = self
+        menu.addItem(quitItem)
     }
 }
