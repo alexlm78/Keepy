@@ -23,6 +23,7 @@ struct KeepyApp: App {
 class AppDelegate: NSObject, NSApplicationDelegate {
     var statusItem: NSStatusItem!
     var popover: NSPopover!
+    var menu: NSMenu!
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         // Crear status item en menu bar
@@ -31,8 +32,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if let button = statusItem.button {
             button.image = NSImage(named: "MenuBarIcon")
             button.image?.isTemplate = true  // Ensure template rendering
-            button.action = #selector(togglePopover)
+            button.action = #selector(statusItemClicked(_:))
             button.target = self
+            button.sendAction(on: [.leftMouseUp, .rightMouseUp])
         }
 
         // Configurar popover
@@ -41,6 +43,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         popover.behavior = .transient
         popover.contentViewController = NSHostingController(rootView: MenuBarPopover())
 
+        // Crear menú contextual (para click derecho)
+        menu = NSMenu()
+
+        let settingsItem = NSMenuItem(title: "Configuración", action: #selector(openSettings), keyEquivalent: ",")
+        settingsItem.target = self
+        menu.addItem(settingsItem)
+
+        menu.addItem(NSMenuItem.separator())
+
+        let quitItem = NSMenuItem(title: "Salir de Keepy", action: #selector(quitApp), keyEquivalent: "q")
+        quitItem.target = self
+        menu.addItem(quitItem)
+
         // Iniciar monitoring de clipboard
         ClipboardManager.shared.startMonitoring()
     }
@@ -48,6 +63,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillTerminate(_ notification: Notification) {
         // Detener monitoring al cerrar
         ClipboardManager.shared.stopMonitoring()
+    }
+
+    @objc func statusItemClicked(_ sender: NSStatusBarButton) {
+        let event = NSApp.currentEvent!
+
+        if event.type == .rightMouseUp {
+            // Click derecho: mostrar menú
+            statusItem.menu = menu
+            statusItem.button?.performClick(nil)
+            statusItem.menu = nil
+        } else {
+            // Click izquierdo: toggle popover
+            togglePopover()
+        }
     }
 
     @objc func togglePopover() {
@@ -59,5 +88,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 popover.contentViewController?.view.window?.makeKey()
             }
         }
+    }
+
+    @objc func openSettings() {
+        // Abrir el popover en el tab de configuración
+        if let button = statusItem.button {
+            if !popover.isShown {
+                popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
+                popover.contentViewController?.view.window?.makeKey()
+            }
+            // Enviar notificación para cambiar a tab de configuración
+            NotificationCenter.default.post(name: NSNotification.Name("OpenSettings"), object: nil)
+        }
+    }
+
+    @objc func quitApp() {
+        NSApplication.shared.terminate(nil)
     }
 }

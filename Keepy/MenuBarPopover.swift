@@ -41,6 +41,9 @@ struct MenuBarPopover: View {
             }
         }
         .frame(width: 400, height: 600)
+        .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("OpenSettings"))) { _ in
+            selectedTab = 3
+        }
     }
 }
 
