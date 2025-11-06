@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500">
+<rect width="1000" height="500" fill="#203959"/>
+<path d="M200 100 H280 V400 H200 Z M300 250 L430 100 H500 L370 250 L500 400 H430 L300 250 Z" fill="#416772"/>
+<text x="550" y="290" font-family="Inter, sans-serif" font-size="100" fill="#ABB7B3">KEEPY</text>
+<text x="550" y="370" font-family="Inter, sans-serif" font-size="40" fill="#96ADA5">Keep what matters.</text>
+</svg>
