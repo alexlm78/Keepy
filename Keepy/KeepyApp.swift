@@ -39,6 +39,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         popover.contentSize = NSSize(width: 400, height: 600)
         popover.behavior = .transient
         popover.contentViewController = NSHostingController(rootView: MenuBarPopover())
+
+        // Iniciar monitoring de clipboard
+        ClipboardManager.shared.startMonitoring()
+    }
+
+    func applicationWillTerminate(_ notification: Notification) {
+        // Detener monitoring al cerrar
+        ClipboardManager.shared.stopMonitoring()
     }
 
     @objc func togglePopover() {
