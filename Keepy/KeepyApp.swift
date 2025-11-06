@@ -29,7 +29,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
         if let button = statusItem.button {
-            button.image = NSImage(systemSymbolName: "doc.on.clipboard", accessibilityDescription: "Keepy")
+            button.image = NSImage(named: "MenuBarIcon")
+            button.image?.isTemplate = true  // Ensure template rendering
             button.action = #selector(togglePopover)
             button.target = self
         }
