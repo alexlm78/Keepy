@@ -66,6 +66,7 @@ struct TabButton: View {
             .frame(maxWidth: .infinity)
             .foregroundColor(selectedTab == tag ? .accentColor : .secondary)
         }
+        .focusable(false)
         .buttonStyle(.plain)
     }
 }

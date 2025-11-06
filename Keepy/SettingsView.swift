@@ -143,7 +143,7 @@ struct SettingsView: View {
                 Divider()
 
                 // Localization diagnostics
-                VStack(alignment: .leading, spacing: 8) {
+                /*VStack(alignment: .leading, spacing: 8) {
                     Label("settings.diagnostics".localized, systemImage: "globe")
                         .font(.headline)
 
@@ -193,7 +193,7 @@ struct SettingsView: View {
                                 .foregroundColor(.secondary)
                         }
                     }
-                }
+                }*/
 
                 Spacer()
             }

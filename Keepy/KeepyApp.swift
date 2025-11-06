@@ -89,9 +89,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if let button = statusItem.button {
             if popover.isShown {
                 popover.performClose(nil)
+                // Ensure status bar button is not highlighted
+                button.isHighlighted = false
             } else {
+                // Bring app to front so inputs in the popover receive focus
+                // Avoid calling makeKey() here: the status bar's window (NSStatusBarWindow)
+                // cannot become key, and forcing it triggers warnings. The popover manages focus.
+                NSApp.activate(ignoringOtherApps: true)
                 popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
-                popover.contentViewController?.view.window?.makeKey()
+                // Remove default highlight around status bar icon
+                button.isHighlighted = false
             }
         }
     }
@@ -100,8 +107,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Abrir el popover en el tab de configuración
         if let button = statusItem.button {
             if !popover.isShown {
+                // Bring app to front so inputs in the popover receive focus
+                // Avoid calling makeKey() here: the status bar's window (NSStatusBarWindow)
+                // cannot become key, and forcing it triggers warnings. The popover manages focus.
+                NSApp.activate(ignoringOtherApps: true)
                 popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
-                popover.contentViewController?.view.window?.makeKey()
+                // Remove default highlight around status bar icon
+                button.isHighlighted = false
             }
             // Enviar notificación para cambiar a tab de configuración
             NotificationCenter.default.post(name: NSNotification.Name("OpenSettings"), object: nil)
